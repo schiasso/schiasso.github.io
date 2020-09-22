@@ -49,75 +49,14 @@
 										<h1>In Development</h1>
 									</header>
 									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
-									<p> THIS SECTION IS CURRENTLY IN DEVELOMENT</p>
+									<p> THIS SECTION IS CURRENTLY IN DEVELOPMENT</p>
 								</div>
 							</section>
 
 					<div class="inner">
 					  <h2 id="code">Code</h2>
 					  <pre><code>
-#include "mpi.h"
-#include &lt;stdio.h&gt;
 
-int main(int argc,char *argv[])
-{
- int p, myid, source, dest, nbln, deb_ligne,i,j,k,rc;
- const int nla=12;    /* Nombre de lignes dans la matrice A */
- const int nca=11;    /* Nombre de colonnes dans la matrice A */
- const int ncb=9;   /* Nombre de colonnes dans la matrice B */
- int  root=0, tag1=1, tag2=2;
- double	 a[nla][nca],           /* matrice A  */
-         b[nca][ncb],           /* matrice B */
-         c[nla][ncb],           /* matrice résultat  C */
-	 buff[nla][nca];	/* buff des comm. collectives*/
-
- MPI_Status status;
- MPI_Init(&argc,&argv);
- MPI_Comm_size(MPI_COMM_WORLD,&p);
- MPI_Comm_rank(MPI_COMM_WORLD,&myid);
-
- /* on suppose nla divise p*/
- nbln  = nla/p;
- if (myid == root)
-      {
-       for (i=0; i&lt;nla; i++)
-            for (j=0; j&lt;nca; j++)
-                   a[i][j]= i+j;
- 
-       for (i=0; i&lt;nca; i++)
-             for (j=0; j&lt;ncb; j++)
-                   b[i][j]= i*j;
- 	}
-
-  MPI_Bcast(&b ,nca*ncb, MPI_DOUBLE, 0, MPI_COMM_WORLD); /*Broadcast de la matrice B*/ 
-
-   /*Scatter de nbln lignes au processeurs aux processeurs*/
-  MPI_Scatter(&a, nca*nbln, MPI_DOUBLE, &buff, nca*nbln, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-
-	/*calcul du pr duit de la matrice AxB */
-          for (k=0; k&lt;ncb; k++)
-               for (i=0; i &lt; nbln; i++)
-                 {
-                   c[i][k] = 0.0;
-                   for (j=0; j&lt;nca; j++)
-                       c[i][k] = c[i][k] + buff[i][j] * b[j][k];
-                 }
-
-  MPI_Gather(&c, nbln*ncb, MPI_DOUBLE, &c, nbln*ncb, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-
-      /* affichage des  résultats */
-if(myid == 0){
-        printf("Matrice résultat \n");
-        for (i=0; i&lt;nla; i++)
-            {
-               printf("\n");
-               for (j=0; j&lt;ncb; j++)
-               printf("%6.2f   ", c[i][j]);
-             }
-             printf ("\n");
-	}
-     MPI_Finalize();
-}
 					  </code></pre>
 					  </div>
 					  </div>
