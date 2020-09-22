@@ -49,9 +49,9 @@
 									  <h1>Real Time Computing</h1>
 									</header>
 									<p>
-									  Computing the positions of an object in real time presents many challenges, since there are many sources of delays that needs to be accounted for: receiving data, making calculation, etc. For this project we needed to use 3 different methods of calculating an integral. One would provide an over-estimation, an other an under-estimation, and the 3rd one somewhere in the middle. On top of those, I've created a 4th method that would intentionally be wrong.</p>
+									  Computing the positions of an object in real time presents many challenges, since there are many sources of delays that needs to be accounted for: receiving data, making calculation, etc. For this project we needed to use 3 different methods of calculating an integral. One would provide an over-estimation, another an under-estimation, and the 3rd one somewhere in the middle. On top of those, I've created a 4th method that would intentionally be wrong.</p>
 									
-<p>Since the 3rd method provides the most accurate result, all the other methods corrects themselves with its value, if and only if all 3 accurate methods are within a 0.005m margin. If we are over that margin we use the solution computed by the over-estimation method.</p>
+<p>Since the 3rd method provides the most accurate result, all the other methods correct themselves with its value, if and only if all 3 accurate methods are within a 0.005m margin. If we are over that margin, we use the solution computed by the over-estimation method.</p>
 <p>The reason for the correction is to save time and to avoid the gap between the over-estimation and under-estimation to widen over time. We save time because we shorten the integral that needs to be calculated by using the Sum Rule: the limit of a sum equals the sum of the limits.</p>
 <p><b>NB:</b> To make the project more challenging, and fun for myself I created a Server – Client relationship. Please contact me if you would like a copy of the full code.</p>
 									</p>
